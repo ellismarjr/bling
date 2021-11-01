@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useState
 } from "react";
 import { v4 as uuidV4 } from 'uuid';
@@ -42,6 +43,8 @@ function TasksProvider({ children }: TaskProviderProps) {
       isComplete: false,
     };
 
+    localStorage.setItem('@todos-app', JSON.stringify([...tasks, newTask]));
+
     setTasks([...tasks, newTask]);
     setNewTaskTitle('');
   }, [newTaskTitle, tasks]);
@@ -54,14 +57,24 @@ function TasksProvider({ children }: TaskProviderProps) {
       return task;
     });
 
+    localStorage.setItem('@todos-app', JSON.stringify(newTasks));
     setTasks(newTasks);
   }, [tasks]);
 
   const handleRemoveTask = useCallback((id: string) => {
     const newTasks = tasks.filter(task => task.id !== id);
+
+    localStorage.setItem('@todos-app', JSON.stringify(newTasks));
+    
     setTasks(newTasks);
   }, [tasks]);
 
+  useEffect(() => {
+    const tasks = localStorage.getItem('@todos-app');
+    if (tasks) {
+      setTasks(JSON.parse(tasks));
+    }
+  }, []);
 
   return (
     <TasksContext.Provider value={{
