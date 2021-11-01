@@ -11,7 +11,8 @@ export function TasksList() {
     handleCreateNewTask,
     handleRemoveTask,
     newTaskTitle,
-    setNewTaskTitle
+    setNewTaskTitle,
+    clearNewTaskInput
   } = useTasks();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,7 +64,10 @@ export function TasksList() {
               value={newTaskTitle}
               autoFocus
             />
-            <FiX size={20} color="#666" />
+            <button type="button" className="clearText"
+              onClick={clearNewTaskInput}>
+              <FiX size={20} color="#666" />
+            </button>
           </div>
           <button className="buttonAddNewTask"
             onClick={handleCreateNewTask}

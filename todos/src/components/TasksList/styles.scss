@@ -60,6 +60,7 @@ ul {
 }
 
 .deleteButton {
+  border: 0;
   background: none;
   transition: filter 0.2s;
 
@@ -102,8 +103,17 @@ footer {
       }
     }
   }
-
   
+  .clearText {
+    background: none;
+    padding: 0;
+    border: 0;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.7);
+    }
+  }
 
   .buttonAddNewTask {
     width: 150px;
@@ -111,6 +121,11 @@ footer {
     font-weight: 600;
     height: 3rem;
     border-radius: 0.3rem;
+    color: var(--text);
+    background: var(--blue);
+  
+    border: 0;
+    border-radius: 0.5rem;
   }
 }
 

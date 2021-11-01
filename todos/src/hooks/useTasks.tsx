@@ -21,6 +21,7 @@ interface TaskContextData {
   handleCreateNewTask: () => void;
   handleToggleTaskComplete: (id: string) => void;
   handleRemoveTask: (id: string) => void;
+  clearNewTaskInput: () => void;
 }
 
 interface TaskProviderProps {
@@ -65,9 +66,13 @@ function TasksProvider({ children }: TaskProviderProps) {
     const newTasks = tasks.filter(task => task.id !== id);
 
     localStorage.setItem('@todos-app', JSON.stringify(newTasks));
-    
+
     setTasks(newTasks);
   }, [tasks]);
+
+  const clearNewTaskInput = useCallback(() => {
+    setNewTaskTitle('');
+  }, [setNewTaskTitle]);
 
   useEffect(() => {
     const tasks = localStorage.getItem('@todos-app');
@@ -83,7 +88,8 @@ function TasksProvider({ children }: TaskProviderProps) {
       newTaskTitle,
       handleCreateNewTask,
       handleToggleTaskComplete,
-      handleRemoveTask
+      handleRemoveTask,
+      clearNewTaskInput
     }}
     >
       {children}
