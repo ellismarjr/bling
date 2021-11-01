@@ -30,9 +30,20 @@ export const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 10,
   },
-  button: {
+  buttonSearch: {
     padding: 10,
     backgroundColor: '#ccc',
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    width: 100,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#999',
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
     width: 100,
@@ -58,7 +69,7 @@ export const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    marginLeft: 5,
+    marginLeft: 10,
   },
 
   contentTitle: {
@@ -67,7 +78,7 @@ export const styles = StyleSheet.create({
     color: '#121214',
   },
   contentItemText: {
-    marginLeft: 10,
+    marginLeft: 5,
     color: '#333',
   },
   footer: {
