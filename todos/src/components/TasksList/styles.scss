@@ -73,6 +73,7 @@ footer {
   background: var(--shapes);
 
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
@@ -126,6 +127,22 @@ footer {
   
     border: 0;
     border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  footer {
+    display: flex;
+    flex-direction: column;
+
+    .inputContainer {
+      margin-right: 0;
+    }
+
+    .buttonAddNewTask {
+      margin-top: 1rem;
+      width: 80%;
+    }
   }
 }
 
