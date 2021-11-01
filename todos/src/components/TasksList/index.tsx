@@ -1,47 +1,26 @@
-import { useState } from 'react';
-import { v4 as uuidV4 } from 'uuid';
 import { FiTrash2, FiMenu, FiX } from 'react-icons/fi';
 
 import './styles.scss';
-
-interface Task {
-  id: string;
-  title: string;
-  isComplete: boolean;
-}
+import { useTasks } from '../../hooks/useTasks';
+import { useEffect, useRef } from 'react';
 
 export function TasksList() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const {
+    tasks,
+    handleToggleTaskComplete,
+    handleCreateNewTask,
+    handleRemoveTask,
+    newTaskTitle,
+    setNewTaskTitle
+  } = useTasks();
 
-  function handleCreateNewTask() {
-    if (!newTaskTitle) return;
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    const newTask = {
-      id: uuidV4(),
-      title: newTaskTitle,
-      isComplete: false,
-    };
-
-    setTasks([...tasks, newTask]);
-    setNewTaskTitle('');
-  }
-
-  function handleToggleTaskComplete(taskId: string) {
-    const newTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, isComplete: !task.isComplete };
-      }
-
-      return task;
-    });
-
-    setTasks(newTasks);
-  }
-
-  function handleRemoveTask(id: string) {
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [tasks]);
 
   return (
     <section className="task-list">
@@ -77,10 +56,13 @@ export function TasksList() {
         <footer>
           <div className="inputContainer">
             <input
+              ref={inputRef}
               type="text"
               placeholder="Qual é a nova tarefa?"
               onChange={(e) => setNewTaskTitle(e.target.value)}
-              value={newTaskTitle} />
+              value={newTaskTitle}
+              autoFocus
+            />
             <FiX size={20} color="#666" />
           </div>
           <button className="buttonAddNewTask"
